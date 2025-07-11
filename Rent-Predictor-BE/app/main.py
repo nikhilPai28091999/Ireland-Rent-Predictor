@@ -74,4 +74,5 @@ def predict_rent(data: RentalInput):
 @app.get("/feature-importance")
 def get_feature_importance():
     df = pd.read_csv("../data/feature_importances.csv")
+    print("test")
     return df.to_dict(orient="records")
