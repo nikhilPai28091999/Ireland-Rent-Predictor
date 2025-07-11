@@ -1,0 +1,185 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url("../public/dublin.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 450px;
+  background: white;
+  padding: 30px;
+  margin: 60px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #343a40;
+}
+h3 {
+  color: black;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  color: black;
+}
+
+label {
+  font-weight: 500;
+  color: #495057;
+  display: block;
+  margin-bottom: 6px;
+}
+
+input {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: white;
+  color: black;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+button:first-of-type {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:last-of-type {
+  background-color: #007bff;
+  margin-top: 12px; /* Adds space between the two buttons */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.result {
+  margin-top: 25px;
+  font-size: 1.3em;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.error {
+  margin-top: 20px;
+  color: #dc3545;
+  font-size: 14px;
+}
+
+/* Multi-select styles */
+.multi-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.multi-select-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.multi-select-display:hover {
+  border-color: #007bff;
+}
+
+.selected-display {
+  flex: 1;
+  font-size: 14px;
+  color: #495057;
+}
+
+.placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ced4da;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.option-item:hover {
+  background-color: #f1f3f5;
+}
+
+.option-item.selected {
+  background-color: #e7f1ff;
+  color: #0056b3;
+}
+
+.checkbox-custom {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #dee2e6;
+  border-radius: 3px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  background-color: white;
+  color: white;
+  transition: all 0.2s;
+}
+
+.option-item.selected .checkbox-custom {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
