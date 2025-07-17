@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-bathrooms",
+      "2": "I-bathrooms",
+      "3": "L-bathrooms",
+      "4": "U-bathrooms",
+      "5": "B-bedrooms",
+      "6": "I-bedrooms",
+      "7": "L-bedrooms",
+      "8": "U-bedrooms",
+      "9": "B-location",
+      "10": "I-location",
+      "11": "L-location",
+      "12": "U-location",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-bathrooms": 1,
+      "I-bathrooms": 2,
+      "L-bathrooms": 3,
+      "U-bathrooms": 4,
+      "B-bedrooms": 5,
+      "I-bedrooms": 6,
+      "L-bedrooms": 7,
+      "U-bedrooms": 8,
+      "B-location": 9,
+      "I-location": 10,
+      "L-location": 11,
+      "U-location": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

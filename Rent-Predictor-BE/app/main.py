@@ -3,13 +3,23 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
-
+import os
+import requests
+from app.chat import chatFunction
+from fastapi import Request
+import httpx
 
 # Load model and features
-model = joblib.load("../model/rental_price_model.pkl")
-features = joblib.load("../model/model_features.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, '..', 'model', 'rental_price_model.pkl')
+features_path = os.path.join(BASE_DIR, '..', 'model', 'model_features.pkl')
+
+model = joblib.load(model_path)
+features = joblib.load(features_path)
 
 
+# nlp = spacy.load("en_core_web_sm")
+user_sessions = {}
 
 app = FastAPI()
 
@@ -27,6 +37,9 @@ class RentalInput(BaseModel):
     bath: float
     location: str
     utilities: list[str] = []
+
+class QueryInput(BaseModel):
+    text: str
 
 expected_utilities = [
     "Parking",
@@ -76,3 +89,90 @@ def get_feature_importance():
     df = pd.read_csv("../data/feature_importances.csv")
     print("test")
     return df.to_dict(orient="records")
+
+
+# @app.post("/parse-query")
+# def parse_query(data: QueryInput, request: Request):
+
+#     user_id = "default_user"  # Or use something like `request.client.host`
+
+#     # Initialize memory if not already
+#     if user_id not in user_sessions:
+#         user_sessions[user_id] = {
+#             "bed": None,
+#             "bath": None,
+#             "location": None,
+#             "utilities": [],
+#         }
+
+#     # Load current session
+#     session = user_sessions[user_id]
+
+
+#     doc = nlp(data.text.lower())
+#     parsed = chatFunction(doc, {}, data, expected_utilities)
+
+#     for key in ["bed", "bath", "location"]:
+#         if parsed.get(key):
+#             session[key] = parsed[key]
+
+#     if "utilities" in parsed:
+#         for u in parsed["utilities"]:
+#             if u not in session["utilities"]:
+#                 session["utilities"].append(u) 
+    
+#     missing_fields = []
+#     if not session["bed"]:
+#         missing_fields.append("missingBed")
+#     if not session["bath"]:
+#         missing_fields.append("missingBath")
+#     if not session["location"]:
+#         missing_fields.append("missingLocation")
+
+#     if missing_fields:
+#         messages = [botMessages[field] for field in missing_fields if field in botMessages]
+#         messages = " ".join(messages)
+#         return messages
+    
+
+#     response = requests.post("http://127.0.0.1:8000/predict", json=session, verify=False)
+#     prediction = response.json()["predicted_rent"]
+#     return "The predicted rent for {} Bed and {} Bath in {} will be approximately €{}. Would you like to see the properties associated with this?".format(session["bed"],session["bath"],session["location"],prediction)
+
+greeting_responses = {
+    "greet": "Hello! How can I help you today?",
+    "mood_unhappy": "Why? What happened?"
+}
+
+class Message(BaseModel):
+    text: str
+
+@app.post("/analyze-message")
+async def analyze_message(message: Message):
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                "http://localhost:5005/model/parse",
+                json={"text": message.text}
+            )
+    except httpx.RequestError as e:
+        raise HTTPException(status_code=500, detail=f"Rasa NLU connection error: {str(e)}")
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=500, detail="Rasa NLU request failed")
+
+    rasa_result = response.json()
+    intent = rasa_result.get("intent", {}).get("name", "unknown")
+    entities = {
+        e["entity"]: e["value"]
+        for e in rasa_result.get("entities", [])
+    }
+
+    # Custom replies based on known intents
+    reply = greeting_responses.get(intent, f"Intent detected: {intent}, entities: {entities}")
+
+    return {
+        "reply": reply,
+        "intent": intent,
+        "entities": entities
+    }

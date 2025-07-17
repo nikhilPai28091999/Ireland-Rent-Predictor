@@ -1,0 +1,147 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+
+  - intent: goodbye
+    examples: |
+      - cu
+      - good by
+      - cee you later
+      - good night
+      - bye
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
+
+  - intent: affirm
+    examples: |
+      - yes
+      - y
+      - indeed
+      - of course
+      - that sounds good
+      - correct
+
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
+
+  - intent: mood_great
+    examples: |
+      - perfect
+      - great
+      - amazing
+      - feeling like a king
+      - wonderful
+      - I am feeling very good
+      - I am great
+      - I am amazing
+      - I am going to save the world
+      - super stoked
+      - extremely good
+      - so so perfect
+      - so good
+      - so perfect
+
+  - intent: mood_unhappy
+    examples: |
+      - my day was horrible
+      - I am sad
+      - I don't feel very well
+      - I am disappointed
+      - super sad
+      - I'm so sad
+      - sad
+      - very sad
+      - unhappy
+      - not good
+      - not very good
+      - extremly sad
+      - so saad
+      - so sad
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
+
+  - intent: provide_rent_details
+    examples: |
+      - I am looking for [1](bedrooms) bed and [1](bathrooms) bath in [Dublin 7](location)
+      - looking for [2](bedrooms) bedroom, [2](bathrooms) bathrooms in [Dublin 8](location)
+      - [3](bedrooms) bed flat with [1](bathrooms) bathroom in [Dublin 9](location)
+      - need a [1](bedrooms) bhk in [Dublin 2](location) with [1](bathrooms) bath
+      - find me a place in [Dublin 3](location) with [2](bedrooms) beds and [2](bathrooms) baths
+      - searching for a [2](bedrooms) bed, [1](bathrooms) bath apartment in [Dublin 10](location)
+      - I need [1](bedrooms) Bed and [1](bathrooms) Bath in [Cork](location)
+      - I want to know how much would [1](bedrooms) Bed and [1](bathrooms) Bath would cost in [Dublin 6](location)
+
+  - lookup: bedrooms
+    examples: |
+      - 1
+      - 2
+      - 3
+      - studio
+
+  - lookup: utilities
+    examples: |
+      - parking
+      - gym
+      - wifi
+      - central heating
+      - balcony
+      - dishwasher
+      - washing machine
+      - dryer
+
+  - lookup: location
+    examples: |
+      - Dublin
+      - Dublin 6
+      - Galway
+      - Cork
+      - Limerick
+
+  - regex: bedrooms
+    examples: |
+      - \d+
+
+  - regex: bathrooms
+    examples: |
+      - \d+
+
+  - synonym: bathrooms
+    examples: |
+      - washroom
+      - toilet
+      - bath
+      - bathroom
+
+  - synonym: bedrooms
+    examples: |
+      - bed
