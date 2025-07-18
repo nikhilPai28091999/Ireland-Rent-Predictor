@@ -1,0 +1,96 @@
+.chat-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+  backdrop-filter: blur(8px); /* glassmorphism effect */
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  height: 400px;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 20px;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.chat-bubble.bot {
+  background-color: #e0e0e0;
+  color: #000;
+  align-self: flex-start;
+  text-align: left;
+  border-top-left-radius: 5px;
+}
+
+.chat-bubble.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+  border-top-right-radius: 5px;
+  margin-left: auto;
+}
+
+.chat-input {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.chat-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.chat-input input {
+  flex: 1;
+  min-width: 0; /* 💡 Important: prevents input from shrinking incorrectly */
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}
+
+.chat-input button {
+  width: 100px; /* 🔧 force small fixed width */
+  padding: 0.5rem;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.chat-input button:hover {
+  background-color: #45a049;
+}
