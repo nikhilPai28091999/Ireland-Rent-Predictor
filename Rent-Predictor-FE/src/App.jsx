@@ -34,6 +34,10 @@ function App() {
     );
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   const handlePredict = async () => {
     if (!bed || !bath || !location) {
       setError("All fields are required.");
@@ -60,82 +64,87 @@ function App() {
   const handleInfluenceRent = () => {};
 
   return (
-    <div className="container">
-      <h2>🏡 Ireland Rent Predictor</h2>
-      <div className="form-group">
-        <label>Bedrooms</label>
-        <input
-          type="number"
-          value={bed}
-          onChange={(e) => setBed(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Bathrooms</label>
-        <input
-          type="number"
-          value={bath}
-          onChange={(e) => setBath(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Location (e.g., Dublin 8)</label>
-        <input
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Utilities (can choose more than 1)</label>
-        <div className="multi-select-wrapper">
-          <div
-            className="multi-select-display"
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            <div className="selected-display">
-              {utilities.length > 0 ? (
-                <span>
-                  {utilities.length} selected: {utilities.join(", ")}
-                </span>
-              ) : (
-                <span className="placeholder">Select utilities...</span>
-              )}
-            </div>
-            <span className="dropdown-arrow">▼</span>
-          </div>
-          {showDropdown && (
-            <div className="dropdown-options">
-              {utilityOptions.map((utility) => (
-                <div
-                  key={utility}
-                  className={`option-item ${
-                    utilities.includes(utility) ? "selected" : ""
-                  }`}
-                  onClick={() => handleUtilityChange(utility)}
-                >
-                  <span className="checkbox-custom">
-                    {utilities.includes(utility) && "✓"}
-                  </span>
-                  {utility}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-      <button onClick={handlePredict}>Predict Rent</button>
-      <button onClick={() => navigate("/influences")}>
-        What influences rent?{" "}
+    <>
+      <button className="back-button" onClick={handleBack}>
+        Back to Homepage
       </button>
-      ;
-      {prediction && (
-        <div className="result">
-          💶 Estimated Rent: <strong>€{prediction}</strong>
+      <div className="container">
+        <h2>🏡 Ireland Rent Predictor</h2>
+        <div className="form-group">
+          <label>Bedrooms</label>
+          <input
+            type="number"
+            value={bed}
+            onChange={(e) => setBed(e.target.value)}
+          />
         </div>
-      )}
-      {error && <div className="error">{error}</div>}
-    </div>
+        <div className="form-group">
+          <label>Bathrooms</label>
+          <input
+            type="number"
+            value={bath}
+            onChange={(e) => setBath(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Location (e.g., Dublin 8)</label>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Utilities (can choose more than 1)</label>
+          <div className="multi-select-wrapper">
+            <div
+              className="multi-select-display"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <div className="selected-display">
+                {utilities.length > 0 ? (
+                  <span>
+                    {utilities.length} selected: {utilities.join(", ")}
+                  </span>
+                ) : (
+                  <span className="placeholder">Select utilities...</span>
+                )}
+              </div>
+              <span className="dropdown-arrow">▼</span>
+            </div>
+            {showDropdown && (
+              <div className="dropdown-options">
+                {utilityOptions.map((utility) => (
+                  <div
+                    key={utility}
+                    className={`option-item ${
+                      utilities.includes(utility) ? "selected" : ""
+                    }`}
+                    onClick={() => handleUtilityChange(utility)}
+                  >
+                    <span className="checkbox-custom">
+                      {utilities.includes(utility) && "✓"}
+                    </span>
+                    {utility}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <button onClick={handlePredict}>Predict Rent</button>
+        <button onClick={() => navigate("/influences")}>
+          What influences rent?{" "}
+        </button>
+        ;
+        {prediction && (
+          <div className="result">
+            💶 Estimated Rent: <strong>€{prediction}</strong>
+          </div>
+        )}
+        {error && <div className="error">{error}</div>}
+      </div>
+    </>
   );
 }
 

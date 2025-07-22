@@ -27,7 +27,7 @@ function LandingPage() {
         </p>
         <div className="landing-buttons">
           <button onClick={() => navigate("/chat")}>💬 Chat with Bot</button>
-          <button onClick={() => navigate("/manual")}>
+          <button onClick={() => navigate("/app")}>
             📝 Enter Details Manually
           </button>
         </div>
